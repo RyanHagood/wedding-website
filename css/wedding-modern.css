@@ -1,0 +1,185 @@
+/* ============================================================
+   uiCookies:Wedding — modern design layer (2026)
+   An elegant, contemporary refresh over the existing markup.
+   Loaded LAST so it wins. Markup is untouched.
+   Accent: soft rose-gold / warm caramel. Elegant serif accents.
+   ============================================================ */
+
+:root {
+  --bg: #ffffff;
+  --text: #5f5952;                 /* warm body gray */
+  --heading: #2c2620;              /* elegant warm charcoal */
+  --muted: #9a938c;
+  --accent: #c48a5a;               /* soft rose-gold */
+  --accent-deep: #a86f42;          /* darker rose-gold (hover) */
+  --band: linear-gradient(135deg, #cf9469 0%, #bd7748 100%);
+  --band-darker: linear-gradient(135deg, #a97046 0%, #8c5730 100%);
+  --footer: #241d18;
+  --line: #ece7e1;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 2px 10px rgba(60,40,25,.06), 0 8px 30px rgba(60,40,25,.07);
+  --shadow-hover: 0 18px 44px rgba(60,40,25,.18);
+}
+
+/* ---------- base ---------- */
+body {
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); transition: color .2s ease; }
+a:hover, a:focus, a:active { color: var(--accent-deep); text-decoration: none; }
+img { max-width: 100%; }
+
+/* elegant headings in warm charcoal; accent stays for captions/dividers.
+   Colored-band + hero headings keep their own (higher-specificity) white rules. */
+h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005em; }
+
+::selection { background: var(--accent); color: #fff; }
+::-moz-selection { background: var(--accent); color: #fff; }
+
+/* ---------- navbar: animated accent underline on hover ---------- */
+@media (min-width: 768px) {
+  .probootstrap-navbar .navbar-nav > li > a::after {
+    content: ""; position: absolute; left: 16px; right: 16px; bottom: 32px;
+    height: 2px; background: var(--accent);
+    transform: scaleX(0); transform-origin: center;
+    transition: transform .22s ease; pointer-events: none;
+  }
+  .probootstrap-navbar .navbar-nav > li:hover > a::after,
+  .probootstrap-navbar .navbar-nav > li.active > a::after { transform: scaleX(1); }
+}
+.probootstrap-navbar .navbar-nav > li > a { font-weight: 600; letter-spacing: .04em; }
+.probootstrap-navbar .navbar-nav > li > a:hover,
+.probootstrap-navbar .navbar-nav > li > a:focus { color: #fff; }
+.probootstrap-navbar.scrolled .navbar-nav > li > a:hover { color: var(--accent) !important; }
+.probootstrap-navbar.scrolled .navbar-nav > li.active > a { color: var(--accent) !important; }
+
+/* ---------- hero: subtle scrim + text legibility ---------- */
+.flexslider { background: #1a1512; }
+.flexslider::after {
+  content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: linear-gradient(to bottom,
+    rgba(20,15,12,.50) 0%, rgba(20,15,12,.16) 26%,
+    rgba(20,15,12,.18) 64%, rgba(20,15,12,.52) 100%);
+}
+.text-intro-wrap { z-index: 19; }
+.text-intro-wrap .text-intro h1 {
+  text-shadow: 0 2px 26px rgba(0,0,0,.45); letter-spacing: .01em;
+}
+.text-intro-wrap .text-intro h2 {
+  text-shadow: 0 1px 16px rgba(0,0,0,.45); letter-spacing: .02em;
+  color: rgba(255,255,255,.94);
+}
+
+/* ---------- colored bands: dated olive → warm rose-gold gradient ---------- */
+.probootstrap-section.probootstrap-section-colored { background: var(--band); }
+.probootstrap-section.probootstrap-section-colored-darker { background: var(--band-darker); }
+.probootstrap-section.probootstrap-section-colored p,
+.probootstrap-section.probootstrap-section-colored-darker p { color: rgba(255,255,255,.85); }
+.probootstrap-wedding-countdown h4 { color: rgba(255,255,255,.82); letter-spacing: .22em; }
+.date-countdown > div .simply-word { color: rgba(255,255,255,.55); }
+
+/* ---------- groom & bride ---------- */
+.probootstrap-groom-bride .probootstrap-groom figure,
+.probootstrap-groom-bride .probootstrap-bride figure { overflow: visible; margin-bottom: 0; }
+.probootstrap-groom-bride .probootstrap-groom img,
+.probootstrap-groom-bride .probootstrap-bride img {
+  box-shadow: 0 16px 40px rgba(60,40,25,.18);
+  transition: transform .5s ease;
+}
+.probootstrap-groom-bride .probootstrap-groom figure:hover img,
+.probootstrap-groom-bride .probootstrap-bride figure:hover img { transform: scale(1.03); }
+.probootstrap-groom-bride .probootstrap-caption { color: var(--accent); }
+.probootstrap-groom-bride .probootstrap-divider span { color: var(--accent); }
+
+/* ---------- when & where images ---------- */
+.img-rounded { border-radius: var(--radius); }
+.probootstrap-section-colored .img-rounded,
+.probootstrap-section-colored img.img-fluid {
+  border-radius: var(--radius);
+  box-shadow: 0 14px 34px rgba(40,25,12,.22);
+}
+
+/* ---------- gallery cards: rounder corners + soft shadow + hover lift ---------- */
+.probootstrap-image {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform .4s ease, box-shadow .3s ease;
+}
+.probootstrap-image::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(to top, rgba(40,25,12,.22), rgba(40,25,12,0) 55%);
+  opacity: 0; transition: opacity .3s ease; pointer-events: none;
+}
+.probootstrap-image:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+.probootstrap-image:hover::after { opacity: 1; }
+
+/* ---------- section-title flourish (white sections only) ---------- */
+.probootstrap-section:not(.probootstrap-section-colored):not(.probootstrap-section-colored-darker) .text-center > h2::after {
+  content: ""; display: block; width: 64px; height: 2px;
+  margin: 20px auto 0; background: var(--accent); border-radius: 2px;
+}
+
+/* ---------- buttons: pill + accent ---------- */
+.btn.btn-primary {
+  background: var(--accent); border-color: var(--accent);
+  box-shadow: 0 8px 22px rgba(196,138,90,.28);
+  letter-spacing: .06em; font-weight: 600;
+}
+.btn.btn-primary:hover, .btn.btn-primary:active, .btn.btn-primary:focus {
+  background: var(--accent-deep); border-color: var(--accent-deep);
+}
+.btn.btn-ghost { border-color: var(--accent); color: var(--accent); }
+.btn.btn-ghost:hover { background: var(--accent); color: #fff; }
+
+/* ---------- RSVP card + form ---------- */
+.probootstrap-card {
+  border: 1px solid rgba(196,138,90,.28);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 44px;
+}
+.probootstrap-form .form-control {
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.probootstrap-form .form-control:focus,
+.probootstrap-form .form-control:active {
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 3px rgba(196,138,90,.14);
+}
+
+/* ---------- register logos (white artwork) — frosted chips on the darker band ---------- */
+.btn-register {
+  display: inline-block;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.20);
+  border-radius: var(--radius);
+  padding: 26px 30px;
+  transition: transform .3s ease, background .3s ease, border-color .3s ease;
+}
+.btn-register:hover, .btn-register:focus {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,.16);
+  border-color: rgba(255,255,255,.34);
+}
+.btn-register img { top: 0; transform: scale(.9); }
+.btn-register:hover img, .btn-register:focus img { top: 0; opacity: 1; transform: scale(.98); }
+
+/* ---------- footer: polished, warm dark ---------- */
+.probootstrap-footer {
+  background: var(--footer);
+  color: rgba(255,255,255,.6);
+}
+.probootstrap-footer a { color: #e2bd97; text-decoration: none; }
+.probootstrap-footer a:hover { color: #fff; text-decoration: none; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 767.98px) {
+  .probootstrap-card { padding: 26px; }
+  .btn-register { padding: 16px 18px; }
+}

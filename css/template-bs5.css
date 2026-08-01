@@ -1,0 +1,126 @@
+/*
+ * Frame — Bootstrap 5 compatibility layer
+ * Loaded after style.min.css. Contains the animation classes that used to
+ * ship inside styles-merged.css and small adjustments for Bootstrap 5 markup.
+ */
+
+/* ---- Scroll animations (subset of animate.css used by the template) ---- */
+.fadeIn { animation: frameFadeIn .8s ease both; }
+.fadeInUp { animation: frameFadeInUp .8s ease both; }
+.fadeInLeft { animation: frameFadeInLeft .8s ease both; }
+.fadeInRight { animation: frameFadeInRight .8s ease both; }
+
+@keyframes frameFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes frameFadeInUp {
+  from { opacity: 0; transform: translate3d(0, 30px, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes frameFadeInLeft {
+  from { opacity: 0; transform: translate3d(-30px, 0, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes frameFadeInRight {
+  from { opacity: 0; transform: translate3d(30px, 0, 0); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fadeIn, .fadeInUp, .fadeInLeft, .fadeInRight { animation: none; opacity: 1; }
+}
+
+/* ---- Reveal state for scroll animations (was in styles-merged.css) ---- */
+.probootstrap-animated { visibility: visible !important; }
+
+/* ---- Navbar: map the original look onto Bootstrap 5 markup ---- */
+.probootstrap-navbar .navbar-toggle .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: #111;
+}
+.probootstrap-navbar .navbar-toggle .icon-bar + .icon-bar { margin-top: 5px; }
+.probootstrap-navbar .navbar-nav > li > a { display: block; text-decoration: none; }
+.probootstrap-navbar .navbar-toggle {
+  border: none;
+  background: transparent;
+  padding: 9px 10px;
+}
+.probootstrap-navbar .navbar-toggle:focus { outline: none; box-shadow: none; }
+@media (min-width: 768px) {
+  .probootstrap-navbar .navbar-nav { align-items: center; }
+}
+@media (max-width: 767.98px) {
+  .probootstrap-navbar .navbar-collapse { padding-bottom: 10px; }
+  .probootstrap-navbar .navbar-nav > li > a { padding-top: 10px; padding-bottom: 10px; }
+}
+
+/* ---- Hero parallax (replaces jQuery Stellar) ---- */
+.probootstrap-hero { background-size: cover; background-position: center; }
+@media (min-width: 992px) and (prefers-reduced-motion: no-preference) {
+  .probootstrap-hero { background-attachment: fixed; }
+}
+
+/* ---- Bootstrap 5 resets that the original design expects ---- */
+.probootstrap-form .form-group { margin-bottom: 1rem; }
+.probootstrap-form textarea.form-control { height: auto; min-height: 150px; }
+blockquote { margin: 0 0 1rem; }
+.probootstrap-testimonial blockquote p { font-style: italic; }
+a { text-decoration: none; }
+.btn { text-decoration: none; }
+
+/* ---- Hero buttons spacing ---- */
+.probootstrap-subheading .btn { margin: 0 5px 10px; }
+
+/* ---- BS5 toggler reset (we keep the template's animated icon bars) ---- */
+.probootstrap-navbar .navbar-toggler { border: none; padding: 9px 10px; }
+.probootstrap-navbar .navbar-toggler:focus { box-shadow: none; }
+
+/* ---- Vanilla hero slider (replaces FlexSlider) ---- */
+.flexslider { position: relative; overflow: hidden; }
+.flexslider .slides { position: relative; margin: 0; padding: 0; list-style: none; }
+.flexslider .slides > li {
+  position: absolute; inset: 0; margin: 0;
+  background-size: cover; background-position: center;
+  opacity: 0; transition: opacity 1s ease; z-index: 1;
+}
+.flexslider .slides > li.flex-active { position: relative; opacity: 1; z-index: 2; }
+.flexslider .flex-control-paging { position: absolute; bottom: 26px; left: 0; right: 0; z-index: 5; display: flex; justify-content: center; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.flexslider .flex-control-paging a { display: block; width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,.45); text-indent: -9999px; cursor: pointer; transition: background .2s; }
+.flexslider .flex-control-paging a.flex-active { background: #fff; }
+@media (min-width: 992px) and (prefers-reduced-motion: no-preference) {
+  .flexslider .slides > li { background-attachment: fixed; }
+}
+
+/* ---- Card carousels (replace Owl in tabs) → scroll-snap rows ---- */
+.owl-carousel { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0; padding-bottom: 14px; -webkit-overflow-scrolling: touch; }
+.owl-carousel .item { flex: 0 0 calc(33.333% - 14px); scroll-snap-align: start; }
+@media (max-width: 991.98px) { .owl-carousel .item { flex-basis: calc(50% - 10px); } }
+@media (max-width: 575.98px) { .owl-carousel .item { flex-basis: 86%; } }
+.owl-carousel::-webkit-scrollbar { height: 6px; }
+.owl-carousel::-webkit-scrollbar-thumb { background: #d5dbe5; border-radius: 99px; }
+
+/* ---- Testimonial rotator (replaces full-width Owl) ---- */
+.owl-carousel-testimony { display: block; overflow: hidden; position: relative; }
+.owl-carousel-testimony .item { display: none; }
+.owl-carousel-testimony .item.rot-active { display: block; animation: frameFadeIn .7s ease both; }
+
+/* ---- Gallery: CSS columns (replaces Masonry) + lightbox ---- */
+.probootstrap-gallery { column-count: 3; column-gap: 20px; }
+@media (max-width: 991.98px) { .probootstrap-gallery { column-count: 2; } }
+@media (max-width: 575.98px) { .probootstrap-gallery { column-count: 1; } }
+.probootstrap-gallery .grid-item { break-inside: avoid; margin: 0 0 20px; }
+.probootstrap-gallery .grid-item img { width: 100%; height: auto; display: block; }
+.uic-lightbox { position: fixed; inset: 0; z-index: 2000; background: rgba(8, 10, 16, .94); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity .2s; }
+.uic-lightbox.open { opacity: 1; visibility: visible; }
+.uic-lightbox img { max-width: 92vw; max-height: 88vh; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.uic-lightbox button { position: absolute; border: 0; background: none; color: #fff; font-size: 2rem; cursor: pointer; padding: 16px; opacity: .8; }
+.uic-lightbox button:hover { opacity: 1; }
+.uic-lightbox .lb-close { top: 10px; right: 14px; }
+.uic-lightbox .lb-prev { left: 8px; top: 50%; transform: translateY(-50%); }
+.uic-lightbox .lb-next { right: 8px; top: 50%; transform: translateY(-50%); }
+
+/* ---- Header search overlay ---- */
+.probootstrap-search { transition: opacity .2s; }
