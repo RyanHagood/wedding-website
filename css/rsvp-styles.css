@@ -1,0 +1,54 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #f4f0e8;
+  color: #2f352e;
+  font: 16px/1.5 system-ui, sans-serif;
+}
+
+.card {
+  width: min(680px, 100%);
+  padding: clamp(24px, 6vw, 56px);
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 16px 60px rgb(0 0 0 / 10%);
+}
+
+h1 { margin-top: 0; font-family: Georgia, serif; font-size: clamp(2rem, 7vw, 4rem); }
+h2, legend { font-family: Georgia, serif; }
+.eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: .75rem; }
+.row { display: flex; gap: 10px; }
+.row input { flex: 1; }
+
+label { display: grid; gap: 6px; margin: 16px 0; }
+input, select, textarea, button {
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+  border: 1px solid #aeb5aa;
+  border-radius: 8px;
+}
+button {
+  width: auto;
+  cursor: pointer;
+  border: 0;
+  background: #334b38;
+  color: white;
+  font-weight: 700;
+}
+button:disabled { opacity: .6; cursor: wait; }
+fieldset { margin: 24px 0; padding: 18px; border: 1px solid #d8ddd5; border-radius: 10px; }
+legend { padding: 0 8px; font-weight: 700; }
+.hint { color: #697066; font-size: .9rem; }
+.error { color: #a32323; }
+.success { color: #236b35; }
+
+@media (max-width: 520px) {
+  .row { display: grid; }
+  .row button { width: 100%; }
+}
