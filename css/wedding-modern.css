@@ -463,3 +463,34 @@ h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005e
   scroll-margin-top: 80px;
   text-align: center;
 }
+
+.venue-map-link {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 8px 18px;
+
+  color: var(--ivory);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: all 0.2s ease;
+}
+
+.venue-map-link:hover,
+.venue-map-link:focus {
+  background-color: var(--gold);
+  color: var(--espresso);
+  text-decoration: none;
+}
+
+.venue-address a,
+.venue-address a:visited,
+.venue-address a:hover,
+.venue-address a:focus,
+.venue-address a:active {
+  color: inherit;
+  text-decoration: none;
+}
