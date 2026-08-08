@@ -90,9 +90,12 @@ function renderGuestSetup(maxGuests) {
   const setup = document.createElement("div");
   setup.className = "guest-setup";
 
+  const countGroup = document.createElement("div");
+  countGroup.className = "form-group";
+
   const label = document.createElement("label");
   label.setAttribute("for", "guestCount");
-  label.textContent = "How many people are included in this invitation?";
+  label.textContent = "Guests included";
 
   const select = document.createElement("select");
   select.id = "guestCount";
@@ -106,18 +109,27 @@ function renderGuestSetup(maxGuests) {
     select.append(option);
   }
 
+  countGroup.append(label, select);
+
   const generatedFields = document.createElement("div");
   generatedFields.id = "newGuestFields";
 
   select.addEventListener("change", () => {
     generatedFields.replaceChildren();
+
     const count = Number(select.value);
+
     for (let i = 1; i <= count; i += 1) {
-      generatedFields.append(createGuestFieldset({ isNew: true, number: i }));
+      generatedFields.append(
+        createGuestFieldset({
+          isNew: true,
+          number: i
+        })
+      );
     }
   });
 
-  setup.append(label, select, generatedFields);
+  setup.append(countGroup, generatedFields);
   guestFields.append(setup);
 }
 
@@ -131,36 +143,47 @@ function createGuestFieldset(guest) {
   fieldset.append(legend);
 
   if (guest.isNew) {
-    const nameLabel = document.createElement("label");
-    nameLabel.innerHTML = `
-      <span>Guest name</span>
-      <input class="guest-name" maxlength="100" autocomplete="name" required>
-    `;
-    fieldset.append(nameLabel);
+
+    const nameGroup = document.createElement("div");
+    nameGroup.className = "form-group";
+
+    nameGroup.innerHTML = `
+    <label>Guest Name</label>
+    <input
+      class="guest-name"
+      maxlength="100"
+      autocomplete="name"
+      required
+    >
+  `;
+
+    fieldset.append(nameGroup);
+
   }
 
   fieldset.insertAdjacentHTML("beforeend", `
-    <label>
-      <span>Attendance</span>
+    <div class="form-group">
+      <label for="attendence">Attendance</label>
       <select class="attendance" required>
-        <option value="">Choose…</option>
-        <option value="yes">Joyfully accepts</option>
-        <option value="no">Regretfully declines</option>
+        <option value="">Please Select</option>
+        <option value="yes">Yes, I am able to attend</option>
+        <option value="no">No, I am unable to attend</option>
       </select>
-    </label>
-    <label>
-      <span>Meal choice</span>
-      <select class="meal">
-        <option value="">Not selected</option>
-        <option value="chicken">Chicken</option>
-        <option value="vegetarian">Vegetarian</option>
-        <option value="kids">Kids meal</option>
+    </div>
+    <div class="form-group">
+      <label for="meal">Meal Choice</label>
+      <select class="meal" required>
+        <option value="">Please Select</option>
+        <option value="Pork Tenderloin">Pork Tenderloin</option>
+        <option value="Gnocchi">Gnocchi</option>
+        <option value="Kentucky Fried Mushrooms">Kentucky Fried Mushrooms</option>
+        <option value="Chicken">Chicken</option>
       </select>
-    </label>
-    <label>
-      <span>Dietary notes</span>
+    </div>
+    <div class="form-group">
+      <label for="dietary">Dietary Notes</label>
       <input class="dietary" maxlength="200">
-    </label>
+    </div>
   `);
 
   fieldset.querySelector(".attendance").value = guest.attending || "";
@@ -218,12 +241,33 @@ async function submitRsvp(event) {
     const data = await parseApiResponse(response);
     if (!data.ok) throw new Error(data.error || "The RSVP could not be saved.");
 
-    form.innerHTML = `
-      <h2>Thank you</h2>
-      <p>Your RSVP has been recorded. You can reopen the invitation later
-      and submit again to update it.</p>
-    `;
-    setStatus("");
+form.innerHTML = `
+  <div class="rsvp-confirmation">
+    <h2>Thank you!</h2>
+    <p>
+      Your RSVP has been recorded. You can reopen the invitation later
+      and submit again to update it.
+    </p>
+  </div>
+`;
+
+setStatus("");
+
+const confirmation = form.querySelector(".rsvp-confirmation");
+
+if (confirmation) {
+  const navbarHeight = document.querySelector(".probootstrap-navbar")?.offsetHeight || 0;
+  const targetPosition =
+    confirmation.getBoundingClientRect().top +
+    window.scrollY -
+    navbarHeight -
+    120;
+
+  window.scrollTo({
+    top: targetPosition,
+    behavior: "smooth"
+  });
+}
   } catch (error) {
     setStatus(error.message, true);
     submitButton.disabled = false;
@@ -235,3 +279,20 @@ partyCodeInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") lookupParty();
 });
 form.addEventListener("submit", submitRsvp);
+
+function initializeLookupFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const code = (params.get("rsvp") || params.get("code") || "").trim().toUpperCase();
+  if (!code) return;
+
+  partyCodeInput.value = code;
+
+  const rsvpSection = document.querySelector('[data-section="rsvp"]');
+  if (rsvpSection) {
+    rsvpSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  lookupParty();
+}
+
+initializeLookupFromUrl();

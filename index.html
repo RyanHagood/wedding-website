@@ -80,7 +80,7 @@
 
           <div class="probootstrap-groom probootstrap-animate">
             <figure>
-              <img src="img/groom_1.jpg" alt="Free Bootstrap Template by uicookies.com" class="img-fluid">
+              <img src="img/Ryan-Profile.png" alt="Free Bootstrap Template by uicookies.com" class="img-fluid">
             </figure>
             <span class="probootstrap-caption">The Groom</span>
             <h2 class="text-center">Ryan</h2>
@@ -122,21 +122,44 @@
       <div class="row mb40 text-center">
         <div class="col-md-12 probootstrap-animate">
           <h2 class="mt0">When &amp; Where</h2>
+          <h3 class="mt0">Boone Tavern</h3>
+          <p>Berea, Kentucky</p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6 probootstrap-animate">
-          <p><img src="img/img_2.jpg" alt="Free Bootstrap Template by uicookies.com" class="img-fluid img-rounded"></p>
-          <h3 style="text-align: center;">Wedding Ceremony</h3>
-          <p>Description of ceremony location</p>
+<div class="row">
+  <div class="col-md-6 probootstrap-animate">
+    <p>
+      <img
+        src="img/BooneTavernHotel-Exterior.jpg"
+        alt="Boone Tavern in Berea, Kentucky"
+        class="img-fluid img-rounded">
+    </p>
+  </div>
 
-        </div>
-        <div class="col-md-6 probootstrap-animate">
-          <p><img src="img/img_1.jpg" alt="Free Bootstrap Template by uicookies.com" class="img-fluid img-rounded"></p>
-          <h3 style="text-align: center;">Wedding Reception</h3>
-          <p>Description of wedding reception location</p>
-        </div>
-      </div>
+  <div class="col-md-6 probootstrap-animate">
+    <p>
+      <img
+        src="img/BooneTavernTables.jpg"
+        alt="Boone Tavern in Berea, Kentucky"
+        class="img-fluid img-rounded">
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 probootstrap-animate text-center">
+    <h3>Wedding Ceremony &amp; Reception</h3>
+    <p>
+      Saturday, October 18, 2026<br>
+      Ceremony at TBD Time<br>
+      Reception to follow
+    </p>
+    <p>
+      Boone Tavern Hotel &amp; Restaurant<br>
+      100 Main Street N<br>
+      Berea, Kentucky 40403
+    </p>
+  </div>
+</div>
     </div>
   </div>
 
@@ -292,12 +315,14 @@
               <form id="rsvpForm" hidden>
                 <h2 id="partyName"></h2>
                 <div id="guestFields"></div>
-
-                <label for="contactEmail">Contact email (optional)</label>
-                <input id="contactEmail" type="email" autocomplete="email">
-
-                <label for="message">Message (optional)</label>
-                <textarea id="message" maxlength="500" rows="4"></textarea>
+                <div class="form-group">
+                  <label for="contactEmail">Email (optional)</label>
+                  <input id="contactEmail" type="email" autocomplete="email">
+                </div>
+                <div class="form-group">
+                  <label for="message">Message (optional)</label>
+                  <textarea id="message" maxlength="500" rows="4"></textarea>
+                </div>
 
                 <button id="submitButton" type="submit">Submit RSVP</button>
               </form>

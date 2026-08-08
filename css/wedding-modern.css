@@ -6,16 +6,27 @@
    ============================================================ */
 
 :root {
-  --bg: #ffffff;
-  --text: #5f5952;                 /* warm body gray */
-  --heading: #2c2620;              /* elegant warm charcoal */
-  --muted: #9a938c;
-  --accent: #c48a5a;               /* soft rose-gold */
-  --accent-deep: #a86f42;          /* darker rose-gold (hover) */
-  --band: linear-gradient(135deg, #cf9469 0%, #bd7748 100%);
-  --band-darker: linear-gradient(135deg, #a97046 0%, #8c5730 100%);
-  --footer: #241d18;
-  --line: #ece7e1;
+  /* Wedding palette */
+  --ivory: #F6F1E7;
+  --maroon: #6E2C3A;
+  --terracotta: #B65E3C;
+  --olive: #6F7B4B;
+  --gold: #B08D57;
+  --espresso: #4A3428;
+  --aubergine: #4B2942;
+
+  /* Functional colors */
+  --bg: var(--ivory);
+  --text: #5D5148;
+  --heading: var(--espresso);
+  --muted: #8A7D73;
+
+  --accent: var(--terracotta);
+  --accent-deep: var(--maroon);
+  --footer: var(--espresso);
+
+  --line: #DED5C8;
+
   --radius: 14px;
   --radius-sm: 10px;
   --shadow: 0 2px 10px rgba(60,40,25,.06), 0 8px 30px rgba(60,40,25,.07);
@@ -44,12 +55,17 @@ h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005e
 @media (min-width: 768px) {
   .probootstrap-navbar .navbar-nav > li > a::after {
     content: ""; position: absolute; left: 16px; right: 16px; bottom: 32px;
-    height: 2px; background: var(--accent);
+    height: 2px; background: var(--gold);
     transform: scaleX(0); transform-origin: center;
     transition: transform .22s ease; pointer-events: none;
   }
-  .probootstrap-navbar .navbar-nav > li:hover > a::after,
-  .probootstrap-navbar .navbar-nav > li.active > a::after { transform: scaleX(1); }
+  .probootstrap-navbar.scrolled .navbar-nav > li > a:hover {
+  color: var(--maroon) !important;
+}
+
+.probootstrap-navbar.scrolled .navbar-nav > li.active > a {
+  color: var(--maroon) !important;
+}
 }
 .probootstrap-navbar .navbar-nav > li > a { font-weight: 600; letter-spacing: .04em; }
 .probootstrap-navbar .navbar-nav > li > a:hover,
@@ -57,26 +73,33 @@ h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005e
 .probootstrap-navbar.scrolled .navbar-nav > li > a:hover { color: var(--accent) !important; }
 .probootstrap-navbar.scrolled .navbar-nav > li.active > a { color: var(--accent) !important; }
 
-/* ---------- hero: subtle scrim + text legibility ---------- */
-.flexslider { background: #1a1512; }
+/* ---------- hero ---------- */
+.flexslider {
+  background: var(--espresso);
+}
+
 .flexslider::after {
-  content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
-  background: linear-gradient(to bottom,
-    rgba(20,15,12,.50) 0%, rgba(20,15,12,.16) 26%,
-    rgba(20,15,12,.18) 64%, rgba(20,15,12,.52) 100%);
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(74, 52, 40, .68) 0%,
+    rgba(74, 52, 40, .30) 30%,
+    rgba(74, 52, 40, .32) 65%,
+    rgba(74, 52, 40, .70) 100%
+  );
 }
-.text-intro-wrap { z-index: 19; }
-.text-intro-wrap .text-intro h1 {
-  text-shadow: 0 2px 26px rgba(0,0,0,.45); letter-spacing: .01em;
-}
+
+.text-intro-wrap .text-intro h1,
 .text-intro-wrap .text-intro h2 {
-  text-shadow: 0 1px 16px rgba(0,0,0,.45); letter-spacing: .02em;
-  color: rgba(255,255,255,.94);
+  color: var(--ivory);
 }
 
 /* ---------- colored bands: dated olive → warm rose-gold gradient ---------- */
-.probootstrap-section.probootstrap-section-colored { background: var(--band); }
-.probootstrap-section.probootstrap-section-colored-darker { background: var(--band-darker); }
 .probootstrap-section.probootstrap-section-colored p,
 .probootstrap-section.probootstrap-section-colored-darker p { color: rgba(255,255,255,.85); }
 .probootstrap-wedding-countdown h4 { color: rgba(255,255,255,.82); letter-spacing: .22em; }
@@ -87,13 +110,19 @@ h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005e
 .probootstrap-groom-bride .probootstrap-bride figure { overflow: visible; margin-bottom: 0; }
 .probootstrap-groom-bride .probootstrap-groom img,
 .probootstrap-groom-bride .probootstrap-bride img {
+  border: 4px solid var(--gold);
   box-shadow: 0 16px 40px rgba(60,40,25,.18);
   transition: transform .5s ease;
 }
 .probootstrap-groom-bride .probootstrap-groom figure:hover img,
 .probootstrap-groom-bride .probootstrap-bride figure:hover img { transform: scale(1.03); }
-.probootstrap-groom-bride .probootstrap-caption { color: var(--accent); }
-.probootstrap-groom-bride .probootstrap-divider span { color: var(--accent); }
+.probootstrap-groom-bride .probootstrap-caption {
+  color: var(--terracotta);
+}
+
+.probootstrap-groom-bride .probootstrap-divider span {
+  color: var(--gold);
+}
 
 /* ---------- when & where images ---------- */
 .img-rounded { border-radius: var(--radius); }
@@ -105,8 +134,10 @@ h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005e
 
 /* ---------- gallery cards: rounder corners + soft shadow + hover lift ---------- */
 .probootstrap-image {
+  border: 2px solid var(--gold);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  overflow: hidden;
   transition: transform .4s ease, box-shadow .3s ease;
 }
 .probootstrap-image::after {
@@ -172,14 +203,263 @@ h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005e
 
 /* ---------- footer: polished, warm dark ---------- */
 .probootstrap-footer {
-  background: var(--footer);
-  color: rgba(255,255,255,.6);
+  background: var(--espresso);
+  color: rgba(246, 241, 231, .70);
 }
-.probootstrap-footer a { color: #e2bd97; text-decoration: none; }
-.probootstrap-footer a:hover { color: #fff; text-decoration: none; }
 
+.probootstrap-footer a {
+  color: var(--gold);
+}
+
+.probootstrap-footer a:hover {
+  color: var(--ivory);
+}
 /* ---------- responsive ---------- */
 @media (max-width: 767.98px) {
   .probootstrap-card { padding: 26px; }
   .btn-register { padding: 16px 18px; }
+}
+
+/* ---------- countdown ---------- */
+.probootstrap-wedding-countdown {
+  background: var(--maroon) !important;
+}
+
+.probootstrap-wedding-countdown h4 {
+  color: var(--ivory);
+}
+
+.probootstrap-wedding-countdown .date-countdown {
+  color: var(--ivory);
+}
+
+.probootstrap-wedding-countdown .simply-word {
+  color: rgba(246, 241, 231, .72);
+}
+
+/* ---------- groom & bride section ---------- */
+[data-section="groom-bride"] {
+  background: var(--ivory);
+}
+
+[data-section="groom-bride"] h2 {
+  color: var(--espresso);
+}
+
+.probootstrap-groom-bride .probootstrap-caption {
+  color: var(--terracotta);
+}
+
+.probootstrap-groom-bride .probootstrap-divider span {
+  color: var(--gold);
+}
+
+/* ---------- when & where ---------- */
+[data-section="when-where"] {
+  background: var(--olive) !important;
+}
+
+[data-section="when-where"] h2,
+[data-section="when-where"] h3 {
+  color: var(--ivory);
+}
+
+[data-section="when-where"] p {
+  color: rgba(246, 241, 231, .88);
+}
+
+/* ---------- gallery ---------- */
+[data-section="gallery"] {
+  background: var(--ivory);
+}
+
+[data-section="gallery"] h2 {
+  color: var(--espresso);
+}
+
+/* ---------- RSVP ---------- */
+[data-section="rsvp"] {
+  background: var(--aubergine);
+  border-top: none !important;
+}
+
+[data-section="rsvp"] h2,
+[data-section="rsvp"] p,
+[data-section="rsvp"] label,
+[data-section="rsvp"] .hint {
+  color: var(--ivory);
+}
+
+[data-section="rsvp"] h2::after {
+  background: var(--gold) !important;
+}
+
+[data-section="rsvp"] input,
+[data-section="rsvp"] textarea,
+[data-section="rsvp"] select {
+  background: var(--ivory);
+  color: var(--espresso);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+}
+
+[data-section="rsvp"] input:focus,
+[data-section="rsvp"] textarea:focus,
+[data-section="rsvp"] select:focus {
+  outline: none;
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(176, 141, 87, .22);
+}
+
+[data-section="rsvp"] .btn-primary,
+[data-section="rsvp"] #submitButton {
+  display: block;
+  margin: 12px auto 0;
+
+  background: var(--gold);
+  color: var(--espresso);
+
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+
+  padding: 10px 24px;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+[data-section="rsvp"] .btn-primary:hover,
+[data-section="rsvp"] .btn-primary:focus,
+[data-section="rsvp"] #submitButton:hover,
+[data-section="rsvp"] #submitButton:focus {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: var(--ivory);
+}
+
+/* ---------- registry ---------- */
+[data-section="registry"] {
+  background: var(--maroon) !important;
+}
+
+[data-section="registry"] h2 {
+  color: var(--ivory);
+}
+
+.btn-register {
+  display: inline-block;
+  background: rgba(246, 241, 231, .12);
+  border: 1px solid rgba(246, 241, 231, .28);
+  border-radius: var(--radius);
+  padding: 26px 30px;
+
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    border-color .3s ease;
+}
+
+.btn-register:hover,
+.btn-register:focus {
+  transform: translateY(-6px);
+  background: rgba(246, 241, 231, .20);
+  border-color: var(--gold);
+}
+
+[data-section="rsvp"] fieldset legend {
+  color: var(--ivory);
+  font-family: "Rokkitt", serif;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+[data-section="rsvp"] fieldset {
+  max-width: 520px;
+  margin: 0 auto 36px auto;
+}
+
+[data-section="rsvp"] fieldset .form-group {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+[data-section="rsvp"] fieldset .form-group label {
+  text-align: right;
+  margin: 0;
+}
+
+[data-section="rsvp"] fieldset .form-group input,
+[data-section="rsvp"] fieldset .form-group select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+[data-section="rsvp"] #rsvpForm > .form-group {
+  width: 520px;
+  margin: 0 auto 12px auto;
+
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+[data-section="rsvp"] #rsvpForm > .form-group label {
+  text-align: right;
+  margin: 0;
+}
+
+[data-section="rsvp"] #rsvpForm > .form-group input,
+[data-section="rsvp"] #rsvpForm > .form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+[data-section="rsvp"] #message {
+  min-height: 120px;
+  resize: vertical;
+}
+
+[data-section="rsvp"] #submitButton {
+  display: block;
+  margin: 10px auto 0;
+}
+
+[data-section="rsvp"] .guest-setup > .form-group {
+  width: 520px;
+  max-width: 100%;
+  margin: 0 auto 24px auto;
+
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+[data-section="rsvp"] .guest-setup > .form-group label {
+  text-align: right;
+  margin: 0;
+}
+
+[data-section="rsvp"] .guest-setup > .form-group select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+[data-section="rsvp"] #rsvpForm {
+  scroll-margin-top: 80px;
+}
+
+.rsvp-confirmation {
+  scroll-margin-top: 80px;
+  text-align: center;
 }
