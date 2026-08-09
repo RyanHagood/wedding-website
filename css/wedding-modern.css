@@ -271,6 +271,8 @@ h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005e
 /* ---------- gallery ---------- */
 [data-section="gallery"] {
   background: var(--ivory);
+  padding-bottom: 1em;
+  padding-top: 1em;
 }
 
 [data-section="gallery"] h2 {
@@ -281,6 +283,7 @@ h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005e
 [data-section="rsvp"] {
   background: var(--aubergine);
   border-top: none !important;
+  padding-bottom: 1em;
 }
 
 [data-section="rsvp"] h2,
@@ -343,19 +346,39 @@ h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005e
 
 /* ---------- registry ---------- */
 [data-section="registry"] {
-  background: var(--maroon) !important;
+  background: var(--olive) !important;
+  padding-bottom: 25px;
+}
+
+[data-section="registry"] .row:last-child {
+  margin-bottom: 0 !important;
 }
 
 [data-section="registry"] h2 {
   color: var(--ivory);
 }
 
-.btn-register {
-  display: inline-block;
-  background: rgba(246, 241, 231, .12);
+/* Intro paragraph */
+[data-section="registry"] .registry-intro {
+  max-width: 900px;
+  margin: 0 auto 28px;
+  color: rgba(246, 241, 231, .88);
+}
+
+/* Registry cards */
+[data-section="registry"] .btn-register {
+  display: flex;
+  width: 100%;
+  height: 170px;
+
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(246, 241, 231, .10);
   border: 1px solid rgba(246, 241, 231, .28);
   border-radius: var(--radius);
-  padding: 26px 30px;
+
+  padding: 22px 28px;
 
   transition:
     transform .3s ease,
@@ -363,11 +386,46 @@ h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005e
     border-color .3s ease;
 }
 
-.btn-register:hover,
-.btn-register:focus {
-  transform: translateY(-6px);
-  background: rgba(246, 241, 231, .20);
+[data-section="registry"] .btn-register:hover,
+[data-section="registry"] .btn-register:focus {
+  transform: translateY(-4px);
+  background: rgba(246, 241, 231, .17);
   border-color: var(--gold);
+}
+
+/* Keep logos proportional inside a common visual box */
+[data-section="registry"] .btn-register img {
+  display: block;
+  width: auto;
+  height: auto;
+
+  max-width: 88%;
+  max-height: 105px;
+
+  object-fit: contain;
+
+  top: 0;
+  transform: none;
+  opacity: 1;
+}
+
+[data-section="registry"] .btn-register:hover img,
+[data-section="registry"] .btn-register:focus img {
+  top: 0;
+  transform: none;
+  opacity: 1;
+}
+
+@media (max-width: 767.98px) {
+  [data-section="registry"] .btn-register {
+    height: 140px;
+    padding: 18px 22px;
+  }
+
+  [data-section="registry"] .btn-register img {
+    max-width: 72%;
+    max-height: 68px;
+  }
 }
 
 [data-section="rsvp"] fieldset legend {
@@ -493,4 +551,26 @@ h1, h2, h3, h4 { color: var(--heading); font-weight: 700; letter-spacing: -.005e
 .venue-address a:active {
   color: inherit;
   text-decoration: none;
+}
+
+.registry-logo-crate {
+  transform: scale(1.08);
+}
+
+/* ---------- hero text positioning ---------- */
+@media (min-width: 769px) {
+  .text-intro-wrap {
+    top: 70%;
+    transform: translateY(-50%);
+  }
+
+  .text-intro-wrap .text-intro {
+    text-align: left !important;
+    padding-left: 30%;
+  }
+
+  .text-intro-wrap .text-intro h1 {
+    font-size: 88px;
+    line-height: 88px;
+  }
 }
