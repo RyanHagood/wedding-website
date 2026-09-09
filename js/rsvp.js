@@ -174,9 +174,7 @@ function createGuestFieldset(guest) {
       <label for="meal">Meal Choice</label>
       <select class="meal" required>
         <option value="">Please Select</option>
-        <option value="Pork Tenderloin">Pork Tenderloin</option>
         <option value="Gnocchi">Gnocchi</option>
-        <option value="Kentucky Fried Mushrooms">Kentucky Fried Mushrooms</option>
         <option value="Chicken">Chicken</option>
       </select>
     </div>
