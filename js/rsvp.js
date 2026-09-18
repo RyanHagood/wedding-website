@@ -100,14 +100,17 @@ function renderGuestSetup(maxGuests) {
   const select = document.createElement("select");
   select.id = "guestCount";
   select.required = true;
-  select.innerHTML = '<option value="">Choose…</option>';
+  select.innerHTML = `
+  <option value="">Choose…</option>
+  <option value="0">Unable to attend</option>
+`;
 
-  for (let count = 1; count <= maxGuests; count += 1) {
-    const option = document.createElement("option");
-    option.value = String(count);
-    option.textContent = String(count);
-    select.append(option);
-  }
+for (let count = 1; count <= maxGuests; count += 1) {
+  const option = document.createElement("option");
+  option.value = String(count);
+  option.textContent = String(count);
+  select.append(option);
+}
 
   countGroup.append(label, select);
 
@@ -209,8 +212,11 @@ async function submitRsvp(event) {
     if (!currentParty) throw new Error("Look up an invitation first.");
 
     const responses = collectResponses();
-    if (!responses.length) {
-      throw new Error("Choose how many guests are included in this invitation.");
+    const guestCount = document.querySelector("#guestCount");
+    const unableToAttend = guestCount && guestCount.value === "0";
+
+    if (!responses.length && !unableToAttend) {
+      throw new Error("Choose whether you are able to attend.");
     }
     if (responses.some((item) => !item.attending)) {
       throw new Error("Choose an attendance response for every guest.");
@@ -230,6 +236,7 @@ async function submitRsvp(event) {
       body: JSON.stringify({
         action: "submit",
         code: currentParty.code,
+        unableToAttend,
         contactEmail: contactEmail.value.trim(),
         message: message.value.trim(),
         responses
