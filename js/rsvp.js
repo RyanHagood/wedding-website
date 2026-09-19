@@ -95,7 +95,7 @@ function renderGuestSetup(maxGuests) {
 
   const label = document.createElement("label");
   label.setAttribute("for", "guestCount");
-  label.textContent = "Guests included";
+  label.textContent = "Guests included (including self)";
 
   const select = document.createElement("select");
   select.id = "guestCount";
